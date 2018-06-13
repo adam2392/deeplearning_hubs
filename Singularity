@@ -1,11 +1,11 @@
 Bootstrap: docker
-From: marcchpc/pytorch_cuda9
+From: tensorflow/tensorflow:1.8.0-gpu-py3
 
 %environment
   # use bash as default shell
   SHELL=/bin/bash
   export SHELL
-  
+
   # add CUDA paths
   CPATH="/usr/local/cuda/include:$CPATH"
   PATH="/usr/local/cuda/bin:$PATH"
@@ -26,18 +26,30 @@ From: marcchpc/pytorch_cuda9
   # load environment variables
   . /environment
 
+  # use bash as default shell
+  echo 'SHELL=/bin/bash' >> /environment
+
   # make environment file executable
   chmod +x /environment
 
+  # default mount paths
   # default mount paths, files
   mkdir /scratch /data /work-zfs 
   touch /usr/bin/nvidia-smi
-  
-  # user requests (contact marcc-help@marcc.jhu.edu)
-  /opt/conda/bin/conda install opencv scikit-learn scikit-image scipy pandas 
-  /opt/conda/bin/conda install -c anaconda numpy pytest flake8 tensorboard
-  /opt/conda/bin/conda install -c conda-forge tensorboardx tqdm protobuf onnx spectrum nibabel
 
+  # user requests (contact marcc-help@marcc.jhu.edu)
+  # load in extra packages for python
+  apt-get update && apt-get -y install locales
+  locale-gen en_US.UTF-8
+  apt-get install -y git wget python3-dev python3-pip
+  apt-get clean
+
+  apt-get install -y libcupti-dev
+  pip3 install --upgrade pip
+  pip3 install keras
+  pip3 install numpy scipy scikit-learn pandas 
+  pip3 install pytest opencv tensorboard scikit-image spectrum nibabel tqdm
+  
 %runscript
   # executes with the singularity run command
   # delete this section to use existing docker ENTRYPOINT command
