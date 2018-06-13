@@ -33,7 +33,6 @@ From: tensorflow/tensorflow:1.8.0-gpu-py3
   chmod +x /environment
 
   # default mount paths
-  # default mount paths, files
   mkdir /scratch /data /work-zfs 
   touch /usr/bin/nvidia-smi
 
@@ -45,10 +44,10 @@ From: tensorflow/tensorflow:1.8.0-gpu-py3
   apt-get clean
 
   apt-get install -y libcupti-dev
-  pip3 install --upgrade pip
-  pip3 install keras
-  pip3 install numpy scipy scikit-learn pandas 
-  pip3 install pytest opencv tensorboard scikit-image spectrum nibabel tqdm
+  pip install --upgrade pip
+  pip install keras
+  pip install numpy scipy scikit-learn pandas 
+  pip install pytest opencv tensorboard scikit-image spectrum nibabel tqdm
   
 %runscript
   # executes with the singularity run command
