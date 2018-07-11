@@ -6,6 +6,9 @@ From: continuumio/miniconda3
   SHELL=/bin/bash
   export SHELL
 
+  # expose conda
+  PATH="/opt/conda/:$PATH
+  export PATH
 %setup
   # runs on host - the path to the image is $SINGULARITY_ROOTFS
 
