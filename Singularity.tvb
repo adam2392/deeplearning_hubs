@@ -20,6 +20,8 @@ From: alpine:2.7
   mkdir /scratch /data /work-zfs 
   
   # post-setup script
+  apk update && apk add bash
+  
   apt-get update
   apt-get install -y wget
   apt-get install -y bzip2
