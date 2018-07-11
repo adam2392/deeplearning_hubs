@@ -7,8 +7,9 @@ From: continuumio/miniconda3
   export SHELL
 
   # expose conda
-  PATH="/opt/conda/:$PATH
+  PATH="/opt/conda/:$PATH"
   export PATH
+  #PATH=/opt/conda/envs/pytorch-py3.6/bin:$PATH
 %setup
   # runs on host - the path to the image is $SINGULARITY_ROOTFS
 
