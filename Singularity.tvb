@@ -33,6 +33,8 @@ From: alpine:2.7
 %runscript
   # executes with the singularity run command
   # delete this section to use existing docker ENTRYPOINT command
+  conda env list
+  source activate tvb-py2.7
 
 %test
   # test that script is a success
