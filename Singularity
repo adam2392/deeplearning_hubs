@@ -28,9 +28,9 @@ From: tensorflow/tensorflow:1.10.1-gpu-py3
   # runs on host - the path to the image is $SINGULARITY_ROOTFS
 
 %files
-  ./scipopt/scip-6.0.1.tgz
-  ./scipopt/soplex-4.0.1.tgz
-  ./scipopt/vanillafullstrong.patch
+  ./scipopt/scip-6.0.1.tgz /opt
+  ./scipopt/soplex-4.0.1.tgz /opt
+  ./scipopt/vanillafullstrong.patch /opt
 
 %post
   # post-setup script
@@ -64,7 +64,9 @@ From: tensorflow/tensorflow:1.10.1-gpu-py3
 
   # run scipopt and soplex installation
   export SCIPOPTDIR='/opt/scip'
+  cd /opt/
   tar -xzf soplex-4.0.1.tgz
+
   cd soplex-4.0.1/
   mkdir build
     cmake -S . -B build -DCMAKE_INSTALL_PREFIX=$SCIPOPTDIR
