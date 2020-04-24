@@ -80,3 +80,4 @@ From: marcc-hpc/tensorflow:1.10.1-gpu-py3
   # test that script is a success
   cmake --version
   python --version
+  pip --version
