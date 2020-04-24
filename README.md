@@ -1,4 +1,5 @@
 # deeplearning_hubs
+[![https://www.singularity-hub.org/static/img/hosted-singularity--hub-%23e32929.svg](https://www.singularity-hub.org/static/img/hosted-singularity--hub-%23e32929.svg)](https://singularity-hub.org/collections/1078)
 
 Singularity images to support a bare-bones minimum image for creating Singularity images for HPC development.
 This repo specifically has been engineered for use w/ MARCC at JHU.
