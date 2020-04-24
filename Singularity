@@ -25,8 +25,8 @@ From: marcc-hpc/tensorflow:1.10.1-gpu-py3
   # runs on host - the path to the image is $SINGULARITY_ROOTFS
 
 %files
-  scip-6.0.1.tgz
-  soplex-4.0.1.tgz
+  ./scipopt/scip-6.0.1.tgz
+  ./scipopt/soplex-4.0.1.tgz
 
 %post
   # post-setup script
