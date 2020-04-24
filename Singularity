@@ -21,12 +21,16 @@ From: tensorflow/tensorflow:1.10.1-gpu-py3
   PATH="$HOME/code/scip":$PATH
   export PATH
 
+  #
+  export SCIPOPTDIR='/opt/scip'
+
 %setup
   # runs on host - the path to the image is $SINGULARITY_ROOTFS
 
 %files
   ./scipopt/scip-6.0.1.tgz
   ./scipopt/soplex-4.0.1.tgz
+  ./scipopt/vanillafullstrong.patch
 
 %post
   # post-setup script
@@ -45,9 +49,6 @@ From: tensorflow/tensorflow:1.10.1-gpu-py3
   # add the nvidia system management interface path to image
   touch /usr/bin/nvidia-smi
 
-  # run scipopt and soplex installation
-  # TBD
-
   # additional packages
   add-apt-repository ppa:deadsnakes/ppa
   apt-get -y update
@@ -60,6 +61,27 @@ From: tensorflow/tensorflow:1.10.1-gpu-py3
   apt-get install -y gcc
   apt-get install -y python3.6
   alias python=python3
+
+  # run scipopt and soplex installation
+  export SCIPOPTDIR='/opt/scip'
+  tar -xzf soplex-4.0.1.tgz
+  cd soplex-4.0.1/
+  mkdir build
+    cmake -S . -B build -DCMAKE_INSTALL_PREFIX=$SCIPOPTDIR
+    make -C ./build -j 4
+    make -C ./build install
+    cd ..
+
+    tar -xzf scip-6.0.1.tgz
+    cd scip-6.0.1/
+
+    patch -p1 < ./vanillafullstrong.patch
+
+    mkdir build
+    cmake -S . -B build -DSOPLEX_DIR=$SCIPOPTDIR -DCMAKE_INSTALL_PREFIX=$SCIPOPTDIR
+    make -C ./build -j 4
+    make -C ./build install
+    cd ..
 
   # install pip install
   pip install --upgrade pip
