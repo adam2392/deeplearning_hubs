@@ -49,12 +49,13 @@ From: tensorflow/tensorflow:1.10.1-gpu-py3
   # TBD
 
   # additional packages
+  apt-get -y update
   apt-get update
   apt-get install -y python-tk
   apt-get install -y libsm6 libxext6
-  apt-get install cmake
-  apt-get install gcc
-  apt-get install python3.6
+  apt-get install -y cmake
+  apt-get install -y gcc
+  apt-get install -y python3.6
   alias python=python3
 
   # install pip install
