@@ -61,8 +61,9 @@ From: tensorflow/tensorflow:1.10.1-gpu-py3
   alias python=python3
 
   # install pip install
+  pip install --upgrade pip
   pip install cython
-  pip install numpy opencv scikit-learn scikit-image scipy pandas joblib
+  pip install numpy scikit-learn scikit-image scipy pandas joblib opencv-python
   pip install pytest flake8
   pip install tqdm natsort protobuf onnx spectrum
   pip install tensorboardx tensorboard
