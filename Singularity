@@ -49,8 +49,8 @@ From: tensorflow/tensorflow:1.10.1-gpu-py3
   # TBD
 
   # additional packages
+  add-apt-repository ppa:deadsnakes/ppa
   apt-get -y update
-  apt-get update
   apt-get install -y apt-utils
   apt-get install -y curl
   apt-get install -y python-tk
