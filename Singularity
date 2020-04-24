@@ -51,6 +51,8 @@ From: tensorflow/tensorflow:1.10.1-gpu-py3
   # additional packages
   apt-get -y update
   apt-get update
+  apt-get install -y apt-utils
+  apt-get install -y curl
   apt-get install -y python-tk
   apt-get install -y libsm6 libxext6
   apt-get install -y cmake
