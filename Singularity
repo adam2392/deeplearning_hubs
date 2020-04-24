@@ -1,5 +1,5 @@
 Bootstrap: docker
-From: marcc-hpc/tensorflow:1.10.1-gpu-py3
+From: tensorflow/tensorflow:1.10.1-gpu-py3
 
 %environment
   # use bash as default shell
