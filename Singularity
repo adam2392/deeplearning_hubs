@@ -26,12 +26,13 @@ From: tensorflow/tensorflow:1.10.1-gpu-py3
 
 %setup
   # runs on host - the path to the image is $SINGULARITY_ROOTFS
+  mkdir /opt/scip/
 
 %files
   ./scipopt/scip-6.0.1.tgz /opt
   ./scipopt/soplex-4.0.1.tgz /opt
   ./scipopt/vanillafullstrong.patch /opt
-
+  
 %post
   # post-setup script
 
