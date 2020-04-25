@@ -52,6 +52,7 @@ From: tensorflow/tensorflow:1.10.1-gpu-py3
   # additional packages
   add-apt-repository ppa:deadsnakes/ppa
   apt-get -y update
+  apt-get -y upgrade
   apt-get install -y git
   apt-get install -y apt-utils
   apt-get install -y curl
@@ -69,21 +70,24 @@ From: tensorflow/tensorflow:1.10.1-gpu-py3
 
   cd soplex-4.0.1/
   mkdir build
-    cmake -S . -B build -DCMAKE_INSTALL_PREFIX=$SCIPOPTDIR
-    make -C ./build -j 4
-    make -C ./build install
-    cd ..
+  ls
+  pwd
+  ls /opt/
+  cmake -S . -B build -DCMAKE_INSTALL_PREFIX=$SCIPOPTDIR
+  make -C ./build -j 4
+  make -C ./build install
+  cd ..
 
-    tar -xzf scip-6.0.1.tgz
-    cd scip-6.0.1/
+  tar -xzf scip-6.0.1.tgz
+  cd scip-6.0.1/
 
-    patch -p1 < ./vanillafullstrong.patch
+  patch -p1 < ./vanillafullstrong.patch
 
-    mkdir build
-    cmake -S . -B build -DSOPLEX_DIR=$SCIPOPTDIR -DCMAKE_INSTALL_PREFIX=$SCIPOPTDIR
-    make -C ./build -j 4
-    make -C ./build install
-    cd ..
+  mkdir build
+  cmake -S . -B build -DSOPLEX_DIR=$SCIPOPTDIR -DCMAKE_INSTALL_PREFIX=$SCIPOPTDIR
+  make -C ./build -j 4
+  make -C ./build install
+  cd ..
 
   # install pip install
   pip install --upgrade pip
