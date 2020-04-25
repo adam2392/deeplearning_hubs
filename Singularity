@@ -26,13 +26,13 @@ From: tensorflow/tensorflow:1.10.1-gpu-py3
 
 %setup
   # runs on host - the path to the image is $SINGULARITY_ROOTFS
-  mkdir /opt/scip/
+
 
 %files
   ./scipopt/scip-6.0.1.tgz /opt
   ./scipopt/soplex-4.0.1.tgz /opt
   ./scipopt/vanillafullstrong.patch /opt
-  
+
 %post
   # post-setup script
 
@@ -49,6 +49,9 @@ From: tensorflow/tensorflow:1.10.1-gpu-py3
   mkdir /scratch /data /work-zfs
   # add the nvidia system management interface path to image
   touch /usr/bin/nvidia-smi
+
+  # create scip output dir
+  mkdir /opt/scip/
 
   # additional packages
   add-apt-repository ppa:deadsnakes/ppa
