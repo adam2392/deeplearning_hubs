@@ -1,5 +1,5 @@
 Bootstrap: docker
-From: tensorflow/tensorflow:1.10.1-gpu-py3
+From: ubuntu:18.04
 
 %environment
   # use bash as default shell
@@ -65,8 +65,9 @@ From: tensorflow/tensorflow:1.10.1-gpu-py3
   apt-get install -y cmake
   apt-get install -y gcc
   apt-get install -y python3.6
-  apt-get install wget
-  apt-get install libssl-dev
+  apt-get update && apt-get install -y \
+            gcc libprotobuf-dev protobuf-compiler \
+            luarocks wget git vim cmake
   alias python=python3
 
     cmake --version
@@ -74,19 +75,6 @@ From: tensorflow/tensorflow:1.10.1-gpu-py3
   apt-get upgrade
 
   cmake --version
-
-    version=3.16
-    build=5
-    mkdir ~/temp
-    cd ~/temp
-    wget https://cmake.org/files/v$version/cmake-$version.$build.tar.gz
-    tar -xzvf cmake-$version.$build.tar.gz
-    cd cmake-$version.$build/
-    ./bootstrap
-    make -j$(nproc)
-    sudo make install
-    cmake --version
-
 
   # run scipopt and soplex installation
   export SCIPOPTDIR='/opt/scip'
@@ -121,9 +109,11 @@ From: tensorflow/tensorflow:1.10.1-gpu-py3
   pip install graspy
   pip install pytest flake8
   pip install tqdm natsort protobuf onnx spectrum
+  pip install tensorflow-gpu==1.10.1
   pip install tensorboardx tensorboard
   pip install git+https://github.com/jma127/pyltr@78fa0ebfef67d6594b8415aa5c6136e30a5e3395
   pip install git+https://github.com/ds4dm/PySCIPOpt.git@ml-branching
+
 
   # user requests (contact marcc-help@marcc.jhu.edu)
   # /opt/conda/bin/conda config --add channels conda-forge
