@@ -54,7 +54,7 @@ From: tensorflow/tensorflow:1.10.1-gpu-py3
   mkdir /opt/scip/
 
   # add base properties from ubuntu
-  apt-get update && \
+  apt-get -y update && \
     apt-get install -y software-properties-common && \
     rm -rf /var/lib/apt/lists/
   # add package for python3.6+
@@ -63,17 +63,7 @@ From: tensorflow/tensorflow:1.10.1-gpu-py3
   apt-get -y upgrade
   # install utilities
   apt-get install -y apt-transport-https ca-certificates gnupg \
-                         software-properties-common wget
-
-  # enable latest version of cmake
-  # see: https://stackoverflow.com/questions/49859457/how-to-reinstall-the-latest-cmake-version
-  wget -qO - https://apt.kitware.com/keys/kitware-archive-latest.asc |
-    apt-key add -
-  # apt-add-repository 'deb https://apt.kitware.com/ubuntu/ bionic main'
-  apt-add-repository 'deb https://apt.kitware.com/ubuntu/ xenial main'
-  apt-get -y update
-  apt-get install -y cmake
-
+                         software-properties-common
   # additional packages
   apt-get -y update
   apt-get -y upgrade
@@ -89,6 +79,21 @@ From: tensorflow/tensorflow:1.10.1-gpu-py3
             gcc libprotobuf-dev protobuf-compiler \
             luarocks git vim
   alias python=python3
+
+  # enable latest version of cmake
+  # see: https://stackoverflow.com/questions/49859457/how-to-reinstall-the-latest-cmake-version
+  apt-get install -y wget
+  wget -qO - https://apt.kitware.com/keys/kitware-archive-latest.asc |
+    apt-key add -
+  # apt-add-repository 'deb https://apt.kitware.com/ubuntu/ bionic main'
+  add-apt-repository 'deb https://apt.kitware.com/ubuntu/ xenial main'
+  apt-get -y update
+
+  # try to install latest version of cmake
+  apt-get install -y cmake
+  cmake --version
+
+
 
   # debug check
   cmake --version
