@@ -26,7 +26,7 @@ From: tensorflow/tensorflow:1.10.1-gpu-py3
 
 %setup
   # runs on host - the path to the image is $SINGULARITY_ROOTFS
-
+  export SCIPOPTDIR='/opt/scip'
 
 %files
   ./scipopt/scip-6.0.1.tgz /opt
@@ -62,7 +62,7 @@ From: tensorflow/tensorflow:1.10.1-gpu-py3
   apt-get -y update
   apt-get -y upgrade
   # install utilities
-  apt-get install apt-transport-https ca-certificates gnupg \
+  apt-get install -y apt-transport-https ca-certificates gnupg \
                          software-properties-common wget
 
   # enable latest version of cmake
@@ -71,8 +71,8 @@ From: tensorflow/tensorflow:1.10.1-gpu-py3
     apt-key add -
   # apt-add-repository 'deb https://apt.kitware.com/ubuntu/ bionic main'
   apt-add-repository 'deb https://apt.kitware.com/ubuntu/ xenial main'
-  apt-get update
-  apt-get install cmake
+  apt-get -y update
+  apt-get install -y cmake
 
   # additional packages
   apt-get -y update
@@ -133,13 +133,6 @@ From: tensorflow/tensorflow:1.10.1-gpu-py3
   pip install tensorboardx tensorboard
   pip install git+https://github.com/jma127/pyltr@78fa0ebfef67d6594b8415aa5c6136e30a5e3395
   pip install git+https://github.com/ds4dm/PySCIPOpt.git@ml-branching
-
-
-  # user requests (contact marcc-help@marcc.jhu.edu)
-  # /opt/conda/bin/conda config --add channels conda-forge
-  # /opt/conda/bin/conda install numpy opencv scikit-learn scikit-image scipy pandas
-  # /opt/conda/bin/conda install -c pytest flake8 tensorboard
-  # /opt/conda/bin/conda install -c tensorboardx tqdm protobuf onnx spectrum nibabel
 
 %runscript
   # executes with the singularity run command
