@@ -53,6 +53,11 @@ From: ubuntu:18.04
   # create scip output dir
   mkdir /opt/scip/
 
+  # add base properties from ubuntu
+  apt-get update && \
+    apt-get install -y software-properties-common && \
+    rm -rf /var/lib/apt/lists/
+
   # additional packages
   add-apt-repository ppa:deadsnakes/ppa
   apt-get -y update
