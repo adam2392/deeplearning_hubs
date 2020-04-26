@@ -57,6 +57,16 @@ From: ubuntu:18.04
   apt-get update && \
     apt-get install -y software-properties-common && \
     rm -rf /var/lib/apt/lists/
+  apt-get install apt-transport-https ca-certificates gnupg \
+                         software-properties-common wget
+
+  # enable latest version of cmake
+  # see: https://stackoverflow.com/questions/49859457/how-to-reinstall-the-latest-cmake-version
+  wget -qO - https://apt.kitware.com/keys/kitware-archive-latest.asc |
+    sudo apt-key add -
+  apt-add-repository 'deb https://apt.kitware.com/ubuntu/ bionic main'
+  apt-get update
+  apt-get install cmake
 
   # additional packages
   add-apt-repository ppa:deadsnakes/ppa
@@ -72,13 +82,13 @@ From: ubuntu:18.04
   apt-get install -y python3.6
   apt-get update && apt-get install -y \
             gcc libprotobuf-dev protobuf-compiler \
-            luarocks wget git vim cmake
+            luarocks git vim
   alias python=python3
 
-    cmake --version
+  # debug check
+  cmake --version
   apt-get update
   apt-get upgrade
-
   cmake --version
 
   # run scipopt and soplex installation
