@@ -1,5 +1,5 @@
 Bootstrap: docker
-From: ubuntu:18.04
+From: tensorflow/tensorflow:1.10.1-gpu-py3
 
 %environment
   # use bash as default shell
@@ -57,19 +57,24 @@ From: ubuntu:18.04
   apt-get update && \
     apt-get install -y software-properties-common && \
     rm -rf /var/lib/apt/lists/
+  # add package for python3.6+
+  add-apt-repository ppa:deadsnakes/ppa
+  apt-get -y update
+  apt-get -y upgrade
+  # install utilities
   apt-get install apt-transport-https ca-certificates gnupg \
                          software-properties-common wget
 
   # enable latest version of cmake
   # see: https://stackoverflow.com/questions/49859457/how-to-reinstall-the-latest-cmake-version
   wget -qO - https://apt.kitware.com/keys/kitware-archive-latest.asc |
-    sudo apt-key add -
-  apt-add-repository 'deb https://apt.kitware.com/ubuntu/ bionic main'
+    apt-key add -
+  # apt-add-repository 'deb https://apt.kitware.com/ubuntu/ bionic main'
+  apt-add-repository 'deb https://apt.kitware.com/ubuntu/ xenial main'
   apt-get update
   apt-get install cmake
 
   # additional packages
-  add-apt-repository ppa:deadsnakes/ppa
   apt-get -y update
   apt-get -y upgrade
   apt-get install -y git
