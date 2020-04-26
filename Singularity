@@ -66,7 +66,7 @@ From: tensorflow/tensorflow:1.10.1-gpu-py3
   apt-get install -y gcc
   apt-get install -y python3.6
   apt-get install wget
-  apt install libssl-dev
+  apt-get install libssl-dev
   alias python=python3
 
     cmake --version
