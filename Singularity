@@ -29,9 +29,9 @@ From: tensorflow/tensorflow:1.10.1-gpu-py3
   export SCIPOPTDIR='/opt/scip'
 
 %files
-  ./scipopt/scip-6.0.1.tgz /opt
-  ./scipopt/soplex-4.0.1.tgz /opt
-  ./scipopt/vanillafullstrong.patch /opt
+  # ./scipopt/scip-6.0.1.tgz /opt
+  #./scipopt/soplex-4.0.1.tgz /opt
+  #./scipopt/vanillafullstrong.patch /opt
 
 %post
   # post-setup script
@@ -78,7 +78,17 @@ From: tensorflow/tensorflow:1.10.1-gpu-py3
   apt-get update && apt-get install -y \
             gcc libprotobuf-dev protobuf-compiler \
             luarocks git vim
+
+  # try to get python3.6 to be our python
+  curl https://bootstrap.pypa.io/get-pip.py | python3.6 - --user
+  rm /usr/bin/python3
+  ln -s /usr/bin/python3.5 /usr/bin/python3
+  ln -s /usr/bin/python3.6 /usr/local/bin/python
+  alias python3='/usr/bin/python3.6'
   alias python=python3
+  python --version
+  python3 --version
+  python3.6 -m pip -V
 
   # enable latest version of cmake
   # see: https://stackoverflow.com/questions/49859457/how-to-reinstall-the-latest-cmake-version
@@ -93,13 +103,18 @@ From: tensorflow/tensorflow:1.10.1-gpu-py3
   apt-get install -y cmake
   cmake --version
 
-
-
   # debug check
   cmake --version
   apt-get update
   apt-get upgrade
   cmake --version
+
+  git clone https://github.com/adam2392/deeplearning_hubs.git
+  cd deeplearning_hubs
+  git checkout sciptflow
+  cp ./scipopt/scip-6.0.1.tgz /opt
+  cp ./scipopt/soplex-4.0.1.tgz /opt
+  cp ./scipopt/vanillafullstrong.patch /opt
 
   # run scipopt and soplex installation
   export SCIPOPTDIR='/opt/scip'
@@ -119,7 +134,8 @@ From: tensorflow/tensorflow:1.10.1-gpu-py3
   tar -xzf scip-6.0.1.tgz
   cd scip-6.0.1/
 
-  patch -p1 < ./vanillafullstrong.patch
+  # link patches to scip
+  patch -p1 < ../vanillafullstrong.patch
 
   mkdir build
   cmake -S . -B build -DSOPLEX_DIR=$SCIPOPTDIR -DCMAKE_INSTALL_PREFIX=$SCIPOPTDIR
@@ -128,16 +144,16 @@ From: tensorflow/tensorflow:1.10.1-gpu-py3
   cd ..
 
   # install pip install
-  pip install --upgrade pip
-  pip install cython
-  pip install numpy scikit-learn scikit-image scipy pandas joblib opencv-python
-  pip install graspy
-  pip install pytest flake8
-  pip install tqdm natsort protobuf onnx spectrum
-  pip install tensorflow-gpu==1.10.1
-  pip install tensorboardx tensorboard
-  pip install git+https://github.com/jma127/pyltr@78fa0ebfef67d6594b8415aa5c6136e30a5e3395
-  pip install git+https://github.com/ds4dm/PySCIPOpt.git@ml-branching
+  python3.6 -m pip install --upgrade pip
+  python3.6 -m pip install cython
+  python3.6 -m pip install numpy scikit-learn scikit-image scipy pandas joblib opencv-python
+  python3.6 -m pip install graspy
+  python3.6 -m pip install pytest flake8
+  python3.6 -m pip install tqdm natsort protobuf onnx spectrum
+  python3.6 -m pip install tensorflow-gpu==1.10.1
+  python3.6 -m pip install tensorboardx tensorboard
+  python3.6 -m pip install git+https://github.com/jma127/pyltr@78fa0ebfef67d6594b8415aa5c6136e30a5e3395
+  python3.6 -m pip install git+https://github.com/ds4dm/PySCIPOpt.git@ml-branching
 
 %runscript
   # executes with the singularity run command
