@@ -1,5 +1,5 @@
 Bootstrap: docker
-From: tensorflow/tensorflow:1.10.1-gpu-py3
+From: tensorflow/tensorflow:1.12.3-gpu-py3
 
 %environment
   # use bash as default shell
@@ -151,7 +151,7 @@ From: tensorflow/tensorflow:1.10.1-gpu-py3
   python3.6 -m pip install graspy
   python3.6 -m pip install pytest flake8
   python3.6 -m pip install tqdm natsort protobuf onnx spectrum
-  python3.6 -m pip install tensorflow-gpu==1.10.1
+  python3.6 -m pip install tensorflow-gpu==1.12
   python3.6 -m pip install tensorboardx tensorboard
   python3.6 -m pip install git+https://github.com/jma127/pyltr@78fa0ebfef67d6594b8415aa5c6136e30a5e3395
   python3.6 -m pip install git+https://github.com/ds4dm/PySCIPOpt.git@ml-branching
