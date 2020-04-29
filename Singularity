@@ -21,7 +21,7 @@ From: tensorflow/tensorflow:1.14.0-gpu-py3
   PATH="$HOME/code/scip":$PATH
   export PATH
 
-  #
+  # installation and build path for scip/soplex
   export SCIPOPTDIR='/opt/scip'
 
 %setup
