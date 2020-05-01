@@ -156,6 +156,13 @@ From: tensorflow/tensorflow:1.12.3-gpu-py3
   python3.6 -m pip install git+https://github.com/jma127/pyltr@78fa0ebfef67d6594b8415aa5c6136e30a5e3395
   python3.6 -m pip install git+https://github.com/ds4dm/PySCIPOpt.git@ml-branching
 
+    git clone https://github.com/ds4dm/PySVMRank.git
+    cd PySVMRank
+    wget http://download.joachims.org/svm_rank/current/svm_rank.tar.gz  # get SVMrank original source code
+    mkdir src/c
+    tar -xzf svm_rank.tar.gz -C src/c
+    python3.6 -m pip install .
+
 %runscript
   # executes with the singularity run command
   # delete this section to use existing docker ENTRYPOINT command
